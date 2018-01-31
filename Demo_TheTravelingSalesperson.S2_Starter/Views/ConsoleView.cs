@@ -308,7 +308,7 @@ namespace Demo_TheTravelingSalesperson
                         usingMenu = false;
                         break;
                     case '4':
-                        userMenuChoice = MenuOption.CheckInventory;
+                        userMenuChoice = MenuOption.CheckInventory; //
                         usingMenu = false;
                         break;
                     case '5':
