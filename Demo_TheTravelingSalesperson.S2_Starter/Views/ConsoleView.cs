@@ -35,6 +35,7 @@ namespace Demo_TheTravelingSalesperson
 
         /// <summary>
         /// initialize all console settings
+        /// // 
         /// </summary>
         private void InitializeConsole()
         {
