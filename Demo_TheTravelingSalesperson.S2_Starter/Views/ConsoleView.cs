@@ -112,6 +112,50 @@ namespace Demo_TheTravelingSalesperson
         ///       return a Salesperson object with the initial data to the controller. For simplicity in 
         ///       this demo, the ConsoleView object is allowed to access the Salesperson object's properties.
         /// </summary>
+        /// 
+
+        public bool DisplayAccountLoadOrCreate()
+        {
+            ConsoleKeyInfo userInput = Console.ReadKey(true);
+
+
+            ConsoleUtil.HeaderText = "Welcome";
+            ConsoleUtil.DisplayReset();
+
+            ConsoleUtil.DisplayMessage("Would you like to create a new account or load a previous one?");
+            ConsoleUtil.DisplayMessage("");
+
+            ConsoleUtil.DisplayMessage("1.) Create a New Account");
+            ConsoleUtil.DisplayMessage("2.) Load an old Account");
+
+            ConsoleUtil.DisplayPromptMessage("Enter your Response: ");
+
+            bool continueInputLoop = true;
+
+            while (continueInputLoop)
+            {
+                userInput = Console.ReadKey();
+
+                switch (userInput.KeyChar)
+                {
+                    case '1':
+                        return true;
+                        //true means create new account
+                    case '2':
+                        return false;
+                        //false means load old account
+                    default:
+                        break;
+                }
+            }
+            return true;
+        }
+
+        public Salesperson DisplayLoadAccount()
+        {
+            Salesperson me = new Salesperson();
+            return me;
+        }
         public Salesperson DisplaySetupAccount()
         {
             Salesperson salesperson = new Salesperson();
@@ -143,9 +187,11 @@ namespace Demo_TheTravelingSalesperson
                 Console.WriteLine("\n");
                 ConsoleUtil.DisplayPromptMessage("\nChoose your type of Product: ");
                 Console.WriteLine();
+
                 ConsoleUtil.DisplayMessage("\t 1.) Cool \n" +
                     "\t 2.) Cuddly \n " +
                     "\t 3.) Crazy \n");
+
                 goodAnswer = Salesperson.InstantiateProductType(Console.ReadKey(), productToSell, out productToSell);
             } while (!goodAnswer);
 

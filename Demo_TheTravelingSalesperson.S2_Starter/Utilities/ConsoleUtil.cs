@@ -191,7 +191,7 @@ namespace Demo_TheTravelingSalesperson
                 ConsoleUtil.DisplayMessage(messageLines[lineNumber]);
             }
 
-            Console.Write(messageLines[messageLines.Count() - 1]);
+            Console.Write(messageLines[messageLines.Count()- 1]);
         }
 
         /// <summary>

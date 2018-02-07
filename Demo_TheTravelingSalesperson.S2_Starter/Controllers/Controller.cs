@@ -77,7 +77,11 @@ namespace Demo_TheTravelingSalesperson
             //
             // setup initial salesperson account
             //
-            _salesperson = _consoleView.DisplaySetupAccount();
+
+            if (_consoleView.DisplayAccountLoadOrCreate())
+                _salesperson = _consoleView.DisplaySetupAccount();
+            else
+                _salesperson = _consoleView.DisplayLoadAccount();
 
             //
             // application loop
