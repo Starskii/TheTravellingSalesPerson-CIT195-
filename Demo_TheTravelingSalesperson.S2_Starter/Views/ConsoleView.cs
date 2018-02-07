@@ -146,7 +146,7 @@ namespace Demo_TheTravelingSalesperson
                 ConsoleUtil.DisplayMessage("\t 1.) Cool \n" +
                     "\t 2.) Cuddly \n " +
                     "\t 3.) Crazy \n");
-                goodAnswer = Salesperson.InstantiateProductType(productToSell, out productToSell);
+                goodAnswer = Salesperson.InstantiateProductType(Console.ReadKey(), productToSell, out productToSell);
             } while (!goodAnswer);
 
             goodAnswer = false;
@@ -392,5 +392,6 @@ namespace Demo_TheTravelingSalesperson
         }
 
         #endregion
+
     }
 }

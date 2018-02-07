@@ -76,9 +76,9 @@ namespace Demo_TheTravelingSalesperson
 
         #region METHODS
 
-        public static bool InstantiateProductType(Product initializedProduct, out Product finalizedProduct)
+        public static bool InstantiateProductType(ConsoleKeyInfo userResponse, Product initializedProduct, out Product finalizedProduct)
         {
-            ConsoleKeyInfo userResponse = Console.ReadKey();
+            
 
             switch (userResponse.KeyChar)
             {
