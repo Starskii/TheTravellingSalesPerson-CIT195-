@@ -9,9 +9,12 @@
         Travel,
         Buy,
         Sell,
+        ChangeAccountInformation,
         CheckInventory,
         DisplayCities,
         DisplayAccountInfo,
+        Save,
+        Load,
         Exit
     }
 }

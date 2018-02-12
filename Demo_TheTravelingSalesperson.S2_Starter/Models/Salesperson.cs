@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.IO;
+
 namespace Demo_TheTravelingSalesperson
 {
     /// <summary>
@@ -14,15 +16,25 @@ namespace Demo_TheTravelingSalesperson
         private string _accountID;
         private List<string> _citiesVisited;
         private Product _productToSell;
-
-
-
-
-
+        private bool _isOnBackOrder;
+        private int _age;
 
         #endregion
 
         #region PROPERTIES
+
+        public int Age
+        {
+            get { return _age; }
+            set { _age = value; }
+        }
+
+        public bool IsOnBackOrder
+        {
+            get { return _isOnBackOrder; }
+            set { _isOnBackOrder = value; }
+        }
+
         public Product ProductToSell
         {
             get { return _productToSell; }
@@ -112,6 +124,46 @@ namespace Demo_TheTravelingSalesperson
             return succesfulParse; 
         }
 
+        public static Salesperson LoadSalesPerson(Salesperson salesperson)
+        {
+            StreamReader LoadSave = new StreamReader("data.csv");
+
+            string mySalesPersonData = "";
+
+            using (LoadSave)
+            {
+                mySalesPersonData = LoadSave.ReadLine();
+            }
+
+            string[] SalesPersonData = mySalesPersonData.Split(',');
+
+            salesperson.FirstName = SalesPersonData[0];
+            salesperson.LastName = SalesPersonData[1];
+            salesperson.AccountID = SalesPersonData[2];
+            salesperson.ProductToSell.TypeOfProduct = Product.StringToProductType(SalesPersonData[3]);
+            salesperson.ProductToSell.AmountOfProduct = int.Parse(SalesPersonData[4]);
+
+            return salesperson;
+        }
+
+        public static bool SaveSalesPerson(Salesperson salesperson)
+        {
+            StreamWriter SaveSalesPerson = new StreamWriter("data.csv");
+            string saveData = "";
+
+            saveData = (salesperson.FirstName) + "," +
+            (salesperson.LastName) + "," +
+            (salesperson.AccountID) + "," +
+            (salesperson.ProductToSell.TypeOfProduct.ToString()) + "," +
+            (salesperson.ProductToSell.AmountOfProduct);
+
+            using (SaveSalesPerson)
+            {
+                SaveSalesPerson.Write(saveData);
+            }
+
+                return true;
+        }
         #endregion
     }
 }

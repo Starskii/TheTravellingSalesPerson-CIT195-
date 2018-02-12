@@ -113,11 +113,20 @@ namespace Demo_TheTravelingSalesperson
                     case MenuOption.Sell:
                         SellProduct();
                         break;
+                    case MenuOption.ChangeAccountInformation:
+                        ChangeAccountInformation();
+                        break;
                     case MenuOption.DisplayCities:
                         DisplayCities();
                         break;
                     case MenuOption.DisplayAccountInfo:
                         DisplayAccountInfo();
+                        break;
+                    case MenuOption.Load:
+                        LoadAccountInformation();
+                        break;
+                    case MenuOption.Save:
+                        SaveAccountInformation();
                         break;
                     case MenuOption.Exit:
                         _usingApplication = false;
@@ -138,6 +147,20 @@ namespace Demo_TheTravelingSalesperson
         /// <summary>
         /// add the next city location to the list of cities
         /// </summary>
+        /// 
+        private void SaveAccountInformation()
+        {
+            _consoleView.DisplaySaveSalesPerson(_salesperson);
+        }
+
+        private void LoadAccountInformation()
+        {
+            _salesperson = _consoleView.DisplayLoadSalesPerson();
+        }
+        private void ChangeAccountInformation()
+        {
+           _salesperson =  _consoleView.DisplayChangeAccountInformation(_salesperson);
+        }
         private void Travel()
         {
             string nextCity = _consoleView.DisplayGetNextCity();

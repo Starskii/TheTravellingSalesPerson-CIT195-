@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,7 +88,7 @@ namespace Demo_TheTravelingSalesperson
 
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Written by John Velis");
+            ConsoleUtil.DisplayMessage("Written by Jacob Lakies");
             ConsoleUtil.DisplayMessage("Northwestern Michigan College");
             ConsoleUtil.DisplayMessage("");
 
@@ -113,6 +114,65 @@ namespace Demo_TheTravelingSalesperson
         ///       this demo, the ConsoleView object is allowed to access the Salesperson object's properties.
         /// </summary>
         /// 
+
+        public Salesperson DisplayChangeAccountInformation(Salesperson SalespersonToModify)
+        {
+
+            ConsoleUtil.HeaderText = "Modify Account Information";
+
+
+            bool goodAnswer = false;
+
+            ConsoleKeyInfo Stuff;
+
+            while (!goodAnswer)
+            {
+                ConsoleUtil.DisplayReset();
+
+                ConsoleUtil.DisplayMessage("1.) First Name: " + SalespersonToModify.FirstName);
+                ConsoleUtil.DisplayMessage("2.) Last Name: " + SalespersonToModify.LastName);
+                ConsoleUtil.DisplayMessage("3.) ID: " + SalespersonToModify.AccountID);
+                ConsoleUtil.DisplayMessage("4.) Age: " + SalespersonToModify.Age);
+                ConsoleUtil.DisplayMessage("e.) Exit");
+                Console.WriteLine();
+
+
+                Stuff = Console.ReadKey();
+
+                switch (Stuff.KeyChar)
+                {
+                    case '1':
+                        Console.Clear();
+                        Console.Write("What would you like to change the First Name value to?: ");
+                        SalespersonToModify.FirstName = Console.ReadLine();
+                        break;
+                    case '2':
+                        Console.Clear();
+                        Console.Write("What would you like to change the Last Name value to?: ");
+                        SalespersonToModify.LastName =  Console.ReadLine();
+                        break;
+                    case '3':
+                        Console.Clear();
+                        Console.Write("What would you like to change the ID value to?: ");
+                        SalespersonToModify.AccountID = Console.ReadLine();
+                        break;
+                    case '4':
+                        Console.Clear();
+                        Console.Write("What would you like to change the Age value to?: ");
+                        SalespersonToModify.AccountID = Console.ReadLine();
+                        break;
+                    case 'e':
+                    case 'E':
+                        goodAnswer = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+            return SalespersonToModify;
+        }
 
         public bool DisplayAccountLoadOrCreate()
         {
@@ -173,6 +233,19 @@ namespace Demo_TheTravelingSalesperson
             ConsoleUtil.DisplayPromptMessage("Enter your last name: ");
             salesperson.LastName = Console.ReadLine();
             ConsoleUtil.DisplayMessage("");
+
+            goodAnswer = false;
+
+            int age = 0;
+
+            while (!goodAnswer)
+            {
+                ConsoleUtil.DisplayPromptMessage("Enter your age: ");
+                if (int.TryParse(Console.ReadLine(), out age))
+                    goodAnswer = true;
+                salesperson.Age = age;
+                ConsoleUtil.DisplayMessage("");
+            }
 
             ConsoleUtil.DisplayPromptMessage("Enter your account ID: ");
             salesperson.AccountID = Console.ReadLine();
@@ -285,6 +358,7 @@ namespace Demo_TheTravelingSalesperson
             {
                 ConsoleUtil.DisplayMessage("You have backordered " + Math.Abs(salesperson.ProductToSell.AmountOfProduct) + ".");
                 DisplayContinuePrompt();
+                
             }
             else
             {
@@ -326,6 +400,7 @@ namespace Demo_TheTravelingSalesperson
                 //
                 ConsoleUtil.DisplayMessage("Please type the number of your menu choice.");
                 ConsoleUtil.DisplayMessage("");
+
                 Console.Write(
                     "\t" + "1. Travel" + Environment.NewLine +
                     "\t" + "2. Display Cities" + Environment.NewLine +
@@ -333,6 +408,9 @@ namespace Demo_TheTravelingSalesperson
                     "\t" + "4. Check Inventory" + Environment.NewLine +
                     "\t" + "5. Buy" + Environment.NewLine +
                     "\t" + "6. Sell" + Environment.NewLine +
+                    "\t" + "7. Modify Account" + Environment.NewLine +
+                    "\t" + "8. Load Account" + Environment.NewLine +
+                    "\t" + "9. Save Account" + Environment.NewLine +
                     "\t" + "E. Exit" + Environment.NewLine);
 
                 //
@@ -355,7 +433,7 @@ namespace Demo_TheTravelingSalesperson
                         usingMenu = false;
                         break;
                     case '4':
-                        userMenuChoice = MenuOption.CheckInventory; //
+                        userMenuChoice = MenuOption.CheckInventory; 
                         usingMenu = false;
                         break;
                     case '5':
@@ -364,6 +442,18 @@ namespace Demo_TheTravelingSalesperson
                         break;
                     case '6':
                         userMenuChoice = MenuOption.Sell;
+                        usingMenu = false;
+                        break;
+                    case '7':
+                        userMenuChoice = MenuOption.ChangeAccountInformation;
+                        usingMenu = false;
+                        break;
+                    case '8':
+                        userMenuChoice = MenuOption.Load;
+                        usingMenu = false;
+                        break;
+                    case '9':
+                        userMenuChoice = MenuOption.Save;
                         usingMenu = false;
                         break;
                     case 'E':
@@ -435,6 +525,23 @@ namespace Demo_TheTravelingSalesperson
             ConsoleUtil.DisplayMessage("Account ID: " + salesperson.AccountID);
 
             DisplayContinuePrompt();
+        }
+
+        public void DisplaySaveSalesPerson(Salesperson salesPersonToWrite)
+        {
+            Salesperson.SaveSalesPerson(salesPersonToWrite);
+            Console.Clear();
+
+            Console.WriteLine("\n\n Save successful! \n");
+            DisplayContinuePrompt();
+        }
+
+        public Salesperson DisplayLoadSalesPerson()
+        {
+            Salesperson salesperson = new Salesperson();
+            salesperson = Salesperson.LoadSalesPerson(salesperson);
+
+            return salesperson;
         }
 
         #endregion
